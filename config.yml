@@ -1,0 +1,2 @@
+# App configs
+osrm_url: 'http://osrm.zoopit.no:5000/table/v1/driving/'
