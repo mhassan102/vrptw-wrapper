@@ -21,7 +21,7 @@ def vrptw_route(input_json):
 
     exportCSV = True
 
-    gaVRPTW(
+    return gaVRPTW(
         instName=instName,
         unitCost=unitCost,
         initCost=initCost,
