@@ -14,19 +14,21 @@ def create_input_vrpd(users, distance_matrix):
 
     # Creating deport part
     coordinates = {}
-    coordinates['x'] = 13.0
-    coordinates['y'] = 52.0
     deport = {}
+    coordinates['x'] = users[0]['pickup']['coordinates'][0]
+    coordinates['y'] = users[0]['pickup']['coordinates'][1]
     deport['coordinates'] = coordinates
     deport['demand'] = 0.0
-    deport['due_time'] = 1236.0
+    deport['due_time'] = 1235.0
     deport['ready_time'] = 0.0
     deport['service_time'] = 0.0
     data['deport'] = deport
-
+    
     # Creating Customer deleivery part
     count = 1
     for user in users:
+        coordinates = {}
+        deport = {}
     	coordinates['x'] = user['delivery']['coordinates'][0]
     	coordinates['y'] = user['delivery']['coordinates'][1]
     	deport['coordinates'] = coordinates
@@ -34,12 +36,14 @@ def create_input_vrpd(users, distance_matrix):
     	deport['due_time'] = 1236.0
     	deport['ready_time'] = 0.0
     	deport['service_time'] = 0.0
+        deport['_id'] = user['_id']['$oid']
     	data['customer_'+str(count)] = deport
         count += 1
-
+    
     # appending distance matrix
     data['distance_matrix'] = distance_matrix
     json_data = json.dumps(data)
+    
     with open('/usr/src/app/py-ga-VRPTW/data/json/input.json', 'w') as outfile:
         json.dump(data, outfile, indent=4)
 

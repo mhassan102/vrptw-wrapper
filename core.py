@@ -8,6 +8,9 @@ from deap import base, creator, tools
 from . import BASE_DIR
 from utils import makeDirsForFile, exist
 
+import sys
+sys.path.append("/usr/src/app/router")
+from mapper import *
 
 def ind2route(individual, instance):
     route = []
@@ -206,8 +209,9 @@ def gaVRPTW(instName, unitCost, initCost, waitCost, delayCost, indSize, popSize,
     
     # We need returning json, not print on console and/or writing csv
     return_json = {}
-    return_json ['order'] = bestInd
-    return_json['route'] = ind2route(bestInd, instance)
+    our_order = bestInd[:]
+    return_json['order'] = order_map(our_order)
+    return_json['route'] = route_map(ind2route(bestInd, instance))
     return_json['Fitness'] = bestInd.fitness.values[0]
     return_json['cost'] = 1 / bestInd.fitness.values[0]
     return return_json
