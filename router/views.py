@@ -10,9 +10,9 @@ api = Blueprint('api', __name__)
 @api.route("/route", methods = ['POST'])
 def route():
     try:
-	distance_matrix = osrm_client(request.json['users'])
-	input_json = create_input_vrpd(request.json['users'], distance_matrix)
-	return jsonify(vrptw_route(input_json))
+	distance_matrix = osrm_client(request.json)
+	ind_count = create_input_vrpd(request.json, distance_matrix)
+	return jsonify(vrptw_route(ind_count))
     except Exception as e:
         return "Api is failing with error: " + str(e)
 

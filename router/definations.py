@@ -8,7 +8,7 @@ def load_config(value):
 
 def create_input_vrpd(users, distance_matrix):
     data = {}
-    data['instance_name'] = 'hassan'
+    data['instance_name'] = 'test'
     data['max_vehicle_number'] = 25
     data['vehicle_capacity'] = 200.0
 
@@ -36,14 +36,13 @@ def create_input_vrpd(users, distance_matrix):
     	deport['due_time'] = 1236.0
     	deport['ready_time'] = 0.0
     	deport['service_time'] = 0.0
-        deport['_id'] = user['_id']['$oid']
+        deport['_id'] = user['_id']
     	data['customer_'+str(count)] = deport
         count += 1
     
     # appending distance matrix
     data['distance_matrix'] = distance_matrix
-    json_data = json.dumps(data)
     
     with open('/usr/src/app/py-ga-VRPTW/data/json/input.json', 'w') as outfile:
         json.dump(data, outfile, indent=4)
-
+    return count

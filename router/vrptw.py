@@ -1,9 +1,11 @@
 import sys
 import random
+import json
+
 sys.path.append("/usr/src/app/py-ga-VRPTW")
 from gavrptw.core import gaVRPTW
 
-def vrptw_route(input_json):
+def vrptw_route(count):
     random.seed(64)
 
     instName = 'input'
@@ -12,8 +14,9 @@ def vrptw_route(input_json):
     initCost = 100.0
     waitCost = 1.0
     delayCost = 1.5
-
-    indSize = 2
+    
+    indSize = count-1
+    print indSize
     popSize = 400
     cxPb = 0.85
     mutPb = 0.02
