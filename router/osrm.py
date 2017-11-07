@@ -1,6 +1,11 @@
 import requests
+import yaml
 import json
-from definations import *
+
+def load_config(value):
+    with open('config.yml') as f:
+        data = yaml.load(f)
+    return data[value]
 
 def osrm_client(users):
 	headers = {'User-Agent': 'User-Agent verification if any'}
@@ -13,3 +18,13 @@ def osrm_client(users):
 	response = requests.get(url)
 	json_data = json.loads(response.text)
 	return json_data['durations']
+
+
+def get_route_distance(lat1, long1, lat2, long2):
+    headers = {'User-Agent': 'User-Agent verification if any'}
+    url = load_config('osrm_route_url') + \
+		str(lat1) + ',' + str(long1) + ';' + str(lat2) + ',' + str(long2)
+    print url
+    response = requests.get(url)
+    json_data = json.loads(response.text)
+    return json_data['routes'][0]['distance']

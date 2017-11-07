@@ -1,10 +1,6 @@
 import json
-import yaml
+from osrm import get_route_distance
 
-def load_config(value):
-    with open('config.yml') as f:
-        data = yaml.load(f)
-    return data[value]
 
 def create_input_vrpd(users, distance_matrix):
     data = {}
@@ -46,3 +42,26 @@ def create_input_vrpd(users, distance_matrix):
     with open('/usr/src/app/py-ga-VRPTW/data/json/input.json', 'w') as outfile:
         json.dump(data, outfile, indent=4)
     return count
+
+    
+def manual_calculated(input_json):
+    distance_matrix = []
+    coordinates_array = []
+    pickup_x = input_json[0]['pickup']['coordinates'][0]
+    pickup_y = input_json[0]['pickup']['coordinates'][1]
+    coordinates_array.append([pickup_x, pickup_y])  
+ 
+    for user in input_json:
+        delivery_x = user['delivery']['coordinates'][0]
+    	delivery_y = user['delivery']['coordinates'][1]
+        coordinates_array.append([delivery_x, delivery_x])  
+      
+    for outer_points in coordinates_array:
+        row = []
+        for inner_points in coordinates_array: 
+            distance = get_route_distance(outer_points[0], outer_points[1], inner_points[0], inner_points[1])
+            row.append(distance)
+            print row
+         
+        distance_matrix.append(row)
+    return distance_matrix 

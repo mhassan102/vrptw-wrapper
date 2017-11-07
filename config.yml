@@ -1,2 +1,4 @@
 # App configs
 osrm_url: 'http://osrm.zoopit.no:5000/table/v1/driving/'
+osrm_route_url: 'http://osrm.zoopit.no:5000/route/v1/driving/'
+#osrm_url: 'http://router.project-osrm.org/table/v1/driving/'
