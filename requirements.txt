@@ -6,7 +6,7 @@ idna==2.6
 itsdangerous==0.24
 Jinja2==2.9.6
 MarkupSafe==1.0
-PyYAML==3.12
+PyYAML==5.4
 requests==2.18.4
 urllib3==1.22
 virtualenv==15.1.0
